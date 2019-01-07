@@ -12,7 +12,8 @@ public class Loops {
     printstringNtime(5,"Hello world");
     Fibonnaci(10);
     sumNumbers("aa114v3b33");
-    notReplace("This is right");
+    System.out.println(notReplace("This is right"));
+    System.out.println(wordEnds("abcXY123XYijk", "XY"));
   }
   public static void from1to10(){
     for (int i = 1; i <=10 ; i++) {
@@ -96,12 +97,37 @@ public class Loops {
     }
     System.out.println(sum);
   }
-  public static void notReplace(String str){
-    //for (int i = 0; i <str.length() ; i++) {
-//      if(str.charAt(i)=='i' && str.charAt(i-1)==' '&& str.charAt(i+1)=='s' & i+1<str.length()){
-       str.replace("is not","is");
-      //}
-    //}
-    System.out.println(str);
+  public static String notReplace(String str){
+      String result="";
+      for(int i = 0; i < str.length(); i++){
+          if(i-1 >= 0 && Character.isLetter(str.charAt(i-1))
+                  || i+2 < str.length() && Character.isLetter(str.charAt(i+2))) {
+              result += str.charAt(i);
+          }
+    else if(i+1 < str.length() && str.substring(i, i+2).equals("is")) {
+              result += "is not";
+              i++;
+          }
+
+    else result += str.charAt(i);
+      }
+
+      return result;
   }
+
+  private static String wordEnds(String str1, String str) {
+    int str1length = str1.length();
+    int wordStringLength = str.length();
+    String strResult = "";
+    for (int i = 0; i < str1length - wordStringLength + 1; i++) {
+      String word = str1.substring(i, i + wordStringLength);
+      if (i > 0 && word.equals(str))
+        strResult += str1.substring(i - 1, i);
+      if (i < str1length - wordStringLength && word.equals(str))
+        strResult += str1.substring(i + wordStringLength, i + wordStringLength + 1);
+    }
+    return strResult;
+  }
+
+
 }
